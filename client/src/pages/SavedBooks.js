@@ -32,12 +32,12 @@ const [removeBook, { error }] = useMutation(REMOVE_BOOK);
     try {
       const updatedData = await removeBook(bookId, token);
 
-      if (!response.ok) {
+      if (!token) {
         throw new Error('something went wrong!');
       }
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      
+      setUserData(updatedData.data.removeBook);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
